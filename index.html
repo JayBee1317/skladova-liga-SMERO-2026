@@ -8,29 +8,34 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@600;700&display=swap');
 
         :root {
-            --bg-dark: #090d16;
-            --card-bg: rgba(22, 29, 47, 0.85);
+            --bg-dark: #05070f;
+            --card-bg: rgba(15, 23, 42, 0.75);
             --gold: #ffb703;
-            --gold-glow: rgba(255, 183, 3, 0.4);
-            --silver: #cbd5e1;
-            --silver-glow: rgba(203, 213, 225, 0.3);
-            --bronze: #fb8500;
-            --bronze-glow: rgba(251, 133, 0, 0.3);
+            --gold-glow: rgba(255, 183, 3, 0.5);
+            --silver: #e2e8f0;
+            --silver-glow: rgba(226, 232, 240, 0.3);
+            --bronze: #f97316;
+            --bronze-glow: rgba(249, 115, 22, 0.4);
             --cyan: #00f0ff;
-            --cyan-glow: rgba(0, 240, 255, 0.3);
+            --cyan-glow: rgba(0, 240, 255, 0.4);
+            --purple: #a855f7;
             --green: #10b981;
-            --green-glow: rgba(16, 185, 129, 0.4);
+            --green-glow: rgba(16, 185, 129, 0.5);
+            --red: #ef4444;
+            --red-glow: rgba(239, 68, 68, 0.4);
         }
 
         body {
             font-family: 'Rajdhani', sans-serif;
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 50% 10%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(255, 183, 3, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, rgba(0, 240, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 10% 50%, rgba(255, 183, 3, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
             color: #fff;
             margin: 0;
-            padding: 20px;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,30 +43,31 @@
             box-sizing: border-box;
         }
 
-        /* Sekce pro přihlášení */
         .login-bar {
-            background: var(--card-bg);
-            border: 1px solid var(--cyan);
-            box-shadow: 0 0 15px var(--cyan-glow);
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
             border-radius: 50px;
-            padding: 8px 20px;
-            margin-bottom: 25px;
+            padding: 10px 24px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            backdrop-filter: blur(12px);
         }
 
         .login-bar label {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.9rem;
             color: var(--cyan);
+            letter-spacing: 1px;
         }
 
         .login-bar select {
-            background: #0f172a;
+            background: #090d16;
             color: #fff;
             border: 1px solid #334155;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-family: 'Rajdhani', sans-serif;
             font-size: 1.1rem;
@@ -70,87 +76,86 @@
         }
 
         .login-btn {
-            background: linear-gradient(135deg, var(--cyan), #0284c7);
-            color: #000;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #fff;
             border: none;
-            padding: 8px 20px;
+            padding: 9px 24px;
             border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .login-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px var(--cyan-glow);
+            box-shadow: 0 0 20px var(--cyan-glow);
         }
 
         header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+            letter-spacing: 5px;
+            background: linear-gradient(135deg, #fff 30%, var(--cyan) 70%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--cyan-glow);
+            text-shadow: 0 0 40px rgba(0, 240, 255, 0.3);
         }
 
         .subtitle {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
-            color: #64748b;
-            letter-spacing: 3px;
+            font-size: 1rem;
+            color: #94a3b8;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
-        /* Layout */
         .main-layout {
             display: flex;
             gap: 25px;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1350px;
             align-items: flex-start;
         }
 
         .levels-panel {
-            flex: 0 0 300px;
+            flex: 0 0 320px;
             background: var(--card-bg);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 22px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .levels-panel h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             color: var(--cyan);
             text-align: center;
-            letter-spacing: 1px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
         }
 
         .level-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            padding: 9px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         .level-row:last-child { border-bottom: none; }
@@ -161,53 +166,68 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .player-card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 12px 20px;
+            border-radius: 14px;
+            padding: 14px 24px;
             display: grid;
-            grid-template-columns: 50px 1fr 180px 130px;
+            grid-template-columns: 55px 1fr 190px 130px;
             align-items: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .player-card:hover {
+            transform: translateX(4px);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .active-user-highlight {
             border: 2px solid var(--green) !important;
-            box-shadow: 0 0 20px var(--green-glow) !important;
+            box-shadow: 0 0 25px var(--green-glow) !important;
             transform: scale(1.02);
         }
 
-        .rank-1 { border: 1px solid var(--gold); box-shadow: 0 0 20px var(--gold-glow); }
-        .rank-2 { border: 1px solid var(--silver); box-shadow: 0 0 15px var(--silver-glow); }
-        .rank-3 { border: 1px solid var(--bronze); box-shadow: 0 0 15px var(--bronze-glow); }
+        .disqualified-card {
+            opacity: 0.5;
+            background: rgba(30, 10, 10, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+        }
 
-        .rank-number { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; font-weight: 900; color: #475569; }
-        .rank-1 .rank-number { color: var(--gold); }
-        .rank-2 .rank-number { color: var(--silver); }
-        .rank-3 .rank-number { color: var(--bronze); }
+        .disqualified-card .player-name {
+            text-decoration: line-through;
+            color: #ef4444;
+        }
 
-        .player-name { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; }
-        .player-tag { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: #94a3b8; }
+        .rank-1 { border: 1px solid var(--gold); box-shadow: 0 0 25px var(--gold-glow); background: linear-gradient(90deg, rgba(255, 183, 3, 0.12) 0%, var(--card-bg) 60%); }
+        .rank-2 { border: 1px solid var(--silver); box-shadow: 0 0 20px var(--silver-glow); background: linear-gradient(90deg, rgba(226, 232, 240, 0.08) 0%, var(--card-bg) 60%); }
+        .rank-3 { border: 1px solid var(--bronze); box-shadow: 0 0 20px var(--bronze-glow); background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, var(--card-bg) 60%); }
 
-        .next-rank-info { text-align: right; padding-right: 15px; border-right: 1px solid rgba(255, 255, 255, 0.1); }
-        .next-rank-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; }
+        .rank-number { font-family: 'Orbitron', sans-serif; font-size: 1.7rem; font-weight: 900; color: #475569; }
+        .rank-1 .rank-number { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
+        .rank-2 .rank-number { color: var(--silver); text-shadow: 0 0 10px var(--silver-glow); }
+        .rank-3 .rank-number { color: var(--bronze); text-shadow: 0 0 10px var(--bronze-glow); }
+
+        .player-name { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .player-tag { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: #94a3b8; }
+
+        .next-rank-info { text-align: right; padding-right: 18px; border-right: 1px solid rgba(255, 255, 255, 0.1); }
+        .next-rank-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
         .next-rank-val { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: #e2e8f0; font-weight: 700; }
 
         .score-container { text-align: right; font-family: 'Orbitron', sans-serif; }
-        .score-value { font-size: 1.8rem; font-weight: 900; color: var(--cyan); }
-        .score-label { font-size: 0.65rem; color: #64748b; }
+        .score-value { font-size: 1.9rem; font-weight: 900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+        .score-label { font-size: 0.65rem; color: #64748b; letter-spacing: 2px; }
 
-        /* MODÁLNÍ OKNO / ANIMACE HÁČE */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 8, 15, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(3, 5, 12, 0.88);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -217,105 +237,78 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .player-popup {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
+            background: linear-gradient(145deg, #0f172a, #090d16);
             border: 2px solid var(--cyan);
-            box-shadow: 0 0 40px var(--cyan-glow);
-            border-radius: 20px;
+            box-shadow: 0 0 50px var(--cyan-glow);
+            border-radius: 24px;
             padding: 35px;
             width: 90%;
             max-width: 480px;
             text-align: center;
-            transform: scale(0.7) translateY(50px);
+            transform: scale(0.8) translateY(30px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
         }
 
-        .modal-overlay.active .player-popup {
-            transform: scale(1) translateY(0);
-        }
+        .modal-overlay.active .player-popup { transform: scale(1) translateY(0); }
 
         .badge-icon {
-            width: 80px;
-            height: 80px;
+            width: 85px; height: 85px;
             margin: 0 auto 15px auto;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--gold), var(--bronze));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: 0 0 25px var(--gold-glow);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.7rem;
+            box-shadow: 0 0 30px var(--gold-glow);
         }
 
-        .popup-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .popup-rank {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            color: var(--gold);
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
+        .popup-name { font-family: 'Orbitron', sans-serif; font-size: 2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        .popup-rank { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 20px; }
 
         .reward-box {
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid var(--green);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 14px;
+            padding: 16px;
             margin-bottom: 20px;
-            box-shadow: 0 0 15px var(--green-glow);
+            box-shadow: 0 0 20px var(--green-glow);
         }
 
-        .reward-label {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .reward-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--green);
-            text-shadow: 0 0 10px var(--green-glow);
-        }
+        .reward-label { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .reward-value { font-family: 'Orbitron', sans-serif; font-size: 2.3rem; font-weight: 900; color: var(--green); text-shadow: 0 0 12px var(--green-glow); }
 
         .close-btn {
-            background: #334155;
+            background: #1e293b;
             color: #fff;
-            border: none;
-            padding: 10px 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 28px;
             border-radius: 20px;
             font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             cursor: pointer;
-            margin-top: 10px;
+            transition: all 0.2s;
         }
 
-        .close-btn:hover { background: #475569; }
+        .close-btn:hover { background: #334155; transform: scale(1.03); }
 
-        footer { margin-top: 25px; font-family: 'Orbitron', sans-serif; color: #475569; font-size: 0.85rem; }
+        footer { margin-top: 30px; font-family: 'Orbitron', sans-serif; color: #475569; font-size: 0.85rem; letter-spacing: 1px; }
+
+        @media (max-width: 1024px) {
+            .main-layout { flex-direction: column; }
+            .levels-panel { width: 100%; box-sizing: border-box; }
+            .player-card { grid-template-columns: 45px 1fr 110px; }
+            .next-rank-info { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- BAR PRO PŘIHLÁŠENÍ -->
     <div class="login-bar">
         <label for="user-select">🎮 HRÁČ:</label>
         <select id="user-select">
-            <option value="">-- Vyber jméno --</option>
+            <option value="">-- Vyber své jméno --</option>
         </select>
         <button class="login-btn" onclick="PrihlasitUzivatele()">PŘIHLÁSIT SE</button>
     </div>
@@ -326,33 +319,30 @@
     </header>
 
     <div class="main-layout">
-        <!-- LEVÝ PANEL -->
         <div class="levels-panel">
             <h2>📜 PŘEHLED ÚROVNÍ</h2>
             <div id="levels-list"></div>
         </div>
 
-        <!-- HLAVNÍ ŽEBRÍČEK -->
         <div class="leaderboard-container" id="board"></div>
     </div>
 
-    <!-- POPUP KARTA PO PŘIHLÁŠENÍ -->
     <div class="modal-overlay" id="modal">
         <div class="player-popup">
             <div class="badge-icon" id="pop-badge">🎖️</div>
             <div class="popup-name" id="pop-name">Jméno Hráče</div>
             <div class="popup-rank" id="pop-rank">ÚROVEŇ: BAZA</div>
             
-            <div class="reward-box">
+            <div class="reward-box" id="pop-reward-box">
                 <div class="reward-label">Aktuální nárok na odměnu:</div>
                 <div class="reward-value" id="pop-reward">0 Kč</div>
             </div>
 
-            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.9rem; color: #94a3b8; margin-bottom: 15px;">
+            <div style="font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: #94a3b8; margin-bottom: 20px;">
                 Aktuálně nahráno: <span id="pop-pts" style="color: var(--cyan); font-weight: bold;">0</span> bodů
             </div>
 
-            <button class="close-btn" onclick="ZavritModal()">ZAVŘÍT TUTO KARTU</button>
+            <button class="close-btn" onclick="ZavritModal()">ZAVŘÍT KARTU</button>
         </div>
     </div>
 
@@ -361,14 +351,13 @@
     </footer>
 
     <script>
-        // Definice úrovní a odměn v Kč z vaší tabulky
         const urovne = [
-            { nazev: "Bronz II", body: 60, odmena: "400 Kč", ikona: "🥉" },
-            { nazev: "Bronz I", body: 130, odmena: "600 Kč", ikona: "🥉" },
-            { nazev: "Stříbrná II", body: 210, odmena: "800 Kč", ikona: "🥈" },
-            { nazev: "Stříbrná I", body: 300, odmena: "1 000 Kč", ikona: "🥈" },
-            { nazev: "Zlatá II", body: 400, odmena: "1 400 Kč", ikona: "🥇" },
-            { nazev: "Zlatá I", body: 500, odmena: "1 600 Kč", ikona: "🥇" },
+            { nazev: "Bronz I", body: 60, odmena: "400 Kč", ikona: "🥉" },
+            { nazev: "Bronz II", body: 130, odmena: "600 Kč", ikona: "🥉" },
+            { nazev: "Stříbrná I", body: 210, odmena: "800 Kč", ikona: "🥈" },
+            { nazev: "Stříbrná II", body: 300, odmena: "1 000 Kč", ikona: "🥈" },
+            { nazev: "Zlatá I", body: 400, odmena: "1 400 Kč", ikona: "🥇" },
+            { nazev: "Zlatá II", body: 500, odmena: "1 600 Kč", ikona: "🥇" },
             { nazev: "Platinová", body: 620, odmena: "2 000 Kč", ikona: "💎" },
             { nazev: "Diamantová", body: 740, odmena: "2 400 Kč", ikona: "🔷" },
             { nazev: "Expert skladu", body: 850, odmena: "3 000 Kč", ikona: "⭐" },
@@ -376,44 +365,49 @@
             { nazev: "Legenda skladu", body: 1100, odmena: "4 000 Kč", ikona: "🔥" }
         ];
 
-        // Seznam pracovníků
+        // Seznam s novými daty a vyznačenou diskvalifikací
         const tym = [
-            { jmeno: "Císařová Eva", body: 645 },
-            { jmeno: "Jarkovský Dominik", body: 435 },
-            { jmeno: "Kačerková Blanka", body: 415 },
-            { jmeno: "Gruna Jiří", body: 410 },
-            { jmeno: "Blahová Michaela", body: 390 },
-            { jmeno: "Kučerová Veronika", body: 365 },
-            { jmeno: "Janovská Petra", body: 365 },
-            { jmeno: "Kupková Kateřina", body: 325 },
-            { jmeno: "Měřínská Eva", body: 270 },
-            { jmeno: "Ferbyová Vendula", body: 265 },
-            { jmeno: "Fialová Andrea", body: 265 },
-            { jmeno: "Durbocková Růžena", body: 260 },
-            { jmeno: "Došková Eva", body: 245 },
-            { jmeno: "Filip Karel", body: 235 },
-            { jmeno: "Mahovský Pavel", body: 210 },
-            { jmeno: "Neubauer Jan", body: 210 },
-            { jmeno: "Pavlů Zdeněk", body: 210 },
-            { jmeno: "Sedlínská Martina", body: 205 },
-            { jmeno: "Beran Ondřej", body: 200 },
-            { jmeno: "Křejpská Gábina", body: 200 },
-            { jmeno: "Novotný Radim", body: 200 },
-            { jmeno: "Bednářová Sabina", body: 190 },
-            { jmeno: "Bednářová Helena", body: 190 },
-            { jmeno: "Čechovičová Jana", body: 175 },
-            { jmeno: "Brablecová Olena", body: 170 },
-            { jmeno: "Maršálková Žaneta", body: 140 },
-            { jmeno: "Prokopová Veronika", body: 120 },
-            { jmeno: "Málková Sabina", body: 110 },
-            { jmeno: "Furchová Anna", body: 100 },
-            { jmeno: "Přikryl Jan", body: 90 },
-            { jmeno: "Cicálková Eliška", body: 75 }
+            { jmeno: "Beran Ondřej", body: 230, diskvalifikovan: false },
+            { jmeno: "Bednářová Sabina", body: 255, diskvalifikovan: false },
+            { jmeno: "Bednářová Helena", body: 225, diskvalifikovan: false },
+            { jmeno: "Blahová Michaela", body: 390, diskvalifikovan: false },
+            { jmeno: "Brablecová Olena", body: 190, diskvalifikovan: false },
+            { jmeno: "Cicálková Eliška", body: 75, diskvalifikovan: true },
+            { jmeno: "Císařová Eva", body: 720, diskvalifikovan: false },
+            { jmeno: "Čechovičová Jana", body: 220, diskvalifikovan: false },
+            { jmeno: "Došková Eva", body: 245, diskvalifikovan: false },
+            { jmeno: "Durbocková Růžena", body: 295, diskvalifikovan: false },
+            { jmeno: "Ferbyová Vendula", body: 300, diskvalifikovan: false },
+            { jmeno: "Fialová Andrea", body: 300, diskvalifikovan: false },
+            { jmeno: "Filip Karel", body: 255, diskvalifikovan: false },
+            { jmeno: "Furchová Anna", body: 135, diskvalifikovan: false },
+            { jmeno: "Gruna Jiří", body: 410, diskvalifikovan: false },
+            { jmeno: "Hudec Karel", body: 150, diskvalifikovan: true },
+            { jmeno: "Kačerková Blanka", body: 460, diskvalifikovan: false },
+            { jmeno: "Křejpská Gábina", body: 230, diskvalifikovan: false },
+            { jmeno: "Kučerová Veronika", body: 420, diskvalifikovan: false },
+            { jmeno: "Kupková Kateřina", body: 360, diskvalifikovan: false },
+            { jmeno: "Janovská Petra", body: 500, diskvalifikovan: false },
+            { jmeno: "Maršálková Žaneta", body: 170, diskvalifikovan: false },
+            { jmeno: "Měřínská Eva", body: 315, diskvalifikovan: false },
+            { jmeno: "Mahovský Pavel", body: 255, diskvalifikovan: false },
+            { jmeno: "Neubauer Jan", body: 240, diskvalifikovan: false },
+            { jmeno: "Novotný Radim", body: 230, diskvalifikovan: false },
+            { jmeno: "Pavlů Zdeněk", body: 240, diskvalifikovan: false },
+            { jmeno: "Jarkovský Dominik", body: 520, diskvalifikovan: false },
+            { jmeno: "Sedlínská Martina", body: 235, diskvalifikovan: false },
+            { jmeno: "Prokopová Veronika", body: 150, diskvalifikovan: false },
+            { jmeno: "Přikryl Jan", body: 110, diskvalifikovan: false },
+            { jmeno: "Málková Sabina", body: 155, diskvalifikovan: false }
         ];
 
         let prihlasenyUzivatel = null;
 
-        function ZiskejUrovenData(body) {
+        function ZiskejUrovenData(body, diskvalifikovan) {
+            if (diskvalifikovan) {
+                return { aktualni: "DISKVALIFIKOVÁN", odmena: "0 Kč", ikona: "❌", dalsi: null };
+            }
+
             let aktualni = "Začátečník";
             let odmena = "0 Kč";
             let ikona = "🛡️";
@@ -435,18 +429,16 @@
 
         function NaplnSelect() {
             const select = document.getElementById('user-select');
-            // Seřadíme jména abecedně pro snadný výběr
             const serazenaJmena = [...tym].sort((a,b) => a.jmeno.localeCompare(b.jmeno));
             serazenaJmena.forEach(p => {
                 const opt = document.createElement('option');
                 opt.value = p.jmeno;
-                opt.innerText = p.jmeno;
+                opt.innerText = p.diskvalifikovan ? `${p.jmeno} (Diskvalifikován)` : p.jmeno;
                 select.appendChild(opt);
             });
         }
 
         function Render() {
-            // Render úrovní
             const levelsList = document.getElementById('levels-list');
             levelsList.innerHTML = '';
             urovne.forEach(u => {
@@ -458,26 +450,38 @@
                 `;
             });
 
-            // Render žebříčku
-            tym.sort((a, b) => b.body - a.body);
+            // Seřazení: Aktivní hráči podle bodů, diskvalifikovaní na konec
+            tym.sort((a, b) => {
+                if (a.diskvalifikovan && !b.diskvalifikovan) return 1;
+                if (!a.diskvalifikovan && b.diskvalifikovan) return -1;
+                return b.body - a.body;
+            });
+
             const board = document.getElementById('board');
             board.innerHTML = '';
 
             tym.forEach((player, index) => {
                 const rankNum = index + 1;
                 let rankClass = '';
-                if (rankNum === 1) rankClass = 'rank-1';
-                else if (rankNum === 2) rankClass = 'rank-2';
-                else if (rankNum === 3) rankClass = 'rank-3';
+                
+                if (!player.diskvalifikovan) {
+                    if (rankNum === 1) rankClass = 'rank-1';
+                    else if (rankNum === 2) rankClass = 'rank-2';
+                    else if (rankNum === 3) rankClass = 'rank-3';
+                } else {
+                    rankClass = 'disqualified-card';
+                }
 
                 if (prihlasenyUzivatel === player.jmeno) {
                     rankClass += ' active-user-highlight';
                 }
 
-                const levelData = ZiskejUrovenData(player.body);
+                const levelData = ZiskejUrovenData(player.body, player.diskvalifikovan);
                 
                 let nextRankText = "";
-                if (levelData.dalsi) {
+                if (player.diskvalifikovan) {
+                    nextRankText = `<span style="color: var(--red);">MIMO SOUTĚŽ</span>`;
+                } else if (levelData.dalsi) {
                     const chybi = levelData.dalsi.body - player.body;
                     nextRankText = `<span style="color: var(--cyan);">+${chybi} pts</span> na ${levelData.dalsi.nazev}`;
                 } else {
@@ -486,19 +490,18 @@
 
                 const card = document.createElement('div');
                 card.className = `player-card ${rankClass}`;
-                card.id = `card-${player.jmeno.replace(/\s+/g, '')}`;
                 card.innerHTML = `
-                    <div class="rank-number">#${rankNum}</div>
+                    <div class="rank-number">${player.diskvalifikovan ? '❌' : '#' + rankNum}</div>
                     <div class="player-info">
                         <div class="player-name">${player.jmeno}</div>
                         <div class="player-tag">${levelData.ikona} ${levelData.aktualni}</div>
                     </div>
                     <div class="next-rank-info">
-                        <div class="next-rank-label">Chybí do další:</div>
+                        <div class="next-rank-label">${player.diskvalifikovan ? 'STAV' : 'Chybí do další:'}</div>
                         <div class="next-rank-val">${nextRankText}</div>
                     </div>
                     <div class="score-container">
-                        <div class="score-value">${player.body}</div>
+                        <div class="score-value" style="${player.diskvalifikovan ? 'color: #ef4444; text-shadow:none;' : ''}">${player.body}</div>
                         <div class="score-label">BODŮ</div>
                     </div>
                 `;
@@ -515,19 +518,24 @@
 
             prihlasenyUzivatel = jmeno;
             const hrac = tym.find(t => t.jmeno === jmeno);
-            const levelData = ZiskejUrovenData(hrac.body);
+            const levelData = ZiskejUrovenData(hrac.body, hrac.diskvalifikovan);
 
-            // Naplnit Popup okno
             document.getElementById('pop-name').innerText = hrac.jmeno;
             document.getElementById('pop-rank').innerText = `${levelData.ikona} ÚROVEŇ: ${levelData.aktualni}`;
             document.getElementById('pop-reward').innerText = levelData.odmena;
             document.getElementById('pop-pts').innerText = hrac.body;
             document.getElementById('pop-badge').innerText = levelData.ikona;
 
-            // Zobrazit modal
-            document.getElementById('modal').classList.add('active');
+            const rewardBox = document.getElementById('pop-reward-box');
+            if (hrac.diskvalifikovan) {
+                rewardBox.style.borderColor = 'var(--red)';
+                rewardBox.style.background = 'rgba(239, 68, 68, 0.1)';
+            } else {
+                rewardBox.style.borderColor = 'var(--green)';
+                rewardBox.style.background = 'rgba(16, 185, 129, 0.1)';
+            }
 
-            // Prekreslit zebricek (zvýrazní hráče)
+            document.getElementById('modal').classList.add('active');
             Render();
         }
 
