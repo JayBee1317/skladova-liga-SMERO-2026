@@ -45,7 +45,7 @@
         }
 
         /* ========================================== */
-        /* INTRO ANIMACE / SPLASH SCREEN              */
+        /* INTRO ANIMACE                              */
         /* ========================================== */
         #intro-screen {
             position: fixed;
@@ -131,37 +131,30 @@
         }
 
         @keyframes introZoom {
-            0% {
-                opacity: 0;
-                transform: scale(0.7) translateY(30px);
-                filter: blur(10px);
-            }
-            30% {
-                opacity: 1;
-                filter: blur(0px);
-            }
-            80% {
-                opacity: 1;
-                transform: scale(1.05) translateY(0);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            0% { opacity: 0; transform: scale(0.7) translateY(30px); filter: blur(10px); }
+            30% { opacity: 1; filter: blur(0px); }
+            80% { opacity: 1; transform: scale(1.05) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        @keyframes fillBar {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
+        @keyframes fillBar { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulseText { 0% { opacity: 0.7; text-shadow: 0 0 10px var(--cyan-glow); } 100% { opacity: 1; text-shadow: 0 0 25px var(--cyan-glow); } }
 
-        @keyframes pulseText {
-            0% { opacity: 0.7; text-shadow: 0 0 10px var(--cyan-glow); }
-            100% { opacity: 1; text-shadow: 0 0 25px var(--cyan-glow); }
+        /* ========================================== */
+        /* CANVAS PRO ANIMACI VÝBUCHU                */
+        /* ========================================== */
+        #explosion-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10000;
         }
 
         /* ========================================== */
-        /* HLAVNÍ STRÁNKA                             */
+        /* PŘIHLAŠOVACÍ LIŠTA                         */
         /* ========================================== */
         .login-bar {
             background: rgba(15, 23, 42, 0.85);
@@ -205,6 +198,9 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .login-btn:hover {
@@ -212,11 +208,8 @@
             box-shadow: 0 0 20px var(--cyan-glow);
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        /* HLAVIČKA A ROZVRŽENÍ */
+        header { text-align: center; margin-bottom: 30px; }
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
@@ -240,71 +233,64 @@
         }
 
         .main-layout {
-            display: flex;
-            gap: 25px;
+            display: grid;
+            grid-template-columns: 280px 1fr 340px;
+            gap: 20px;
             width: 100%;
-            max-width: 1350px;
+            max-width: 1600px;
             align-items: flex-start;
         }
 
-        .levels-panel {
-            flex: 0 0 320px;
+        /* ROZRADÍCÍ PANELY */
+        .panel-box {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
-            padding: 22px;
+            padding: 20px;
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .levels-panel h2 {
+        .panel-box h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             margin-top: 0;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             color: var(--cyan);
             text-align: center;
             letter-spacing: 2px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .level-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 9px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
-
         .level-row:last-child { border-bottom: none; }
         .level-name { font-weight: 700; }
-        .level-pts { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 0.9rem; }
+        .level-pts { font-family: 'Orbitron', sans-serif; color: var(--cyan); font-size: 0.85rem; }
 
-        .leaderboard-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        /* HLAVNÍ ŽEBRÍČEK */
+        .leaderboard-container { display: flex; flex-direction: column; gap: 10px; }
 
         .player-card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
-            padding: 14px 24px;
+            padding: 12px 20px;
             display: grid;
-            grid-template-columns: 55px 1fr 190px 130px;
+            grid-template-columns: 45px 50px 1fr 160px 110px;
             align-items: center;
             backdrop-filter: blur(12px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .player-card:hover {
-            transform: translateX(4px);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
+        .player-card:hover { transform: translateX(4px); border-color: rgba(255, 255, 255, 0.2); }
 
         .active-user-highlight {
             border: 2px solid var(--green) !important;
@@ -312,37 +298,65 @@
             transform: scale(1.02);
         }
 
-        .disqualified-card {
-            opacity: 0.5;
-            background: rgba(30, 10, 10, 0.6);
-            border: 1px solid rgba(239, 68, 68, 0.3) !important;
-        }
-
-        .disqualified-card .player-name {
-            text-decoration: line-through;
-            color: #ef4444;
-        }
+        .disqualified-card { opacity: 0.5; background: rgba(30, 10, 10, 0.6); border: 1px solid rgba(239, 68, 68, 0.3) !important; }
+        .disqualified-card .player-name { text-decoration: line-through; color: #ef4444; }
 
         .rank-1 { border: 1px solid var(--gold); box-shadow: 0 0 25px var(--gold-glow); background: linear-gradient(90deg, rgba(255, 183, 3, 0.12) 0%, var(--card-bg) 60%); }
         .rank-2 { border: 1px solid var(--silver); box-shadow: 0 0 20px var(--silver-glow); background: linear-gradient(90deg, rgba(226, 232, 240, 0.08) 0%, var(--card-bg) 60%); }
         .rank-3 { border: 1px solid var(--bronze); box-shadow: 0 0 20px var(--bronze-glow); background: linear-gradient(90deg, rgba(249, 115, 22, 0.08) 0%, var(--card-bg) 60%); }
 
-        .rank-number { font-family: 'Orbitron', sans-serif; font-size: 1.7rem; font-weight: 900; color: #475569; }
+        .rank-number { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: #475569; }
         .rank-1 .rank-number { color: var(--gold); text-shadow: 0 0 10px var(--gold-glow); }
         .rank-2 .rank-number { color: var(--silver); text-shadow: 0 0 10px var(--silver-glow); }
         .rank-3 .rank-number { color: var(--bronze); text-shadow: 0 0 10px var(--bronze-glow); }
 
-        .player-name { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-        .player-tag { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: #94a3b8; }
+        /* INDIKÁTOR ZMĚNY POZICE (ŠIPKY) */
+        .trend-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 3px 6px;
+            border-radius: 6px;
+            text-align: center;
+            width: fit-content;
+        }
 
-        .next-rank-info { text-align: right; padding-right: 18px; border-right: 1px solid rgba(255, 255, 255, 0.1); }
-        .next-rank-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
-        .next-rank-val { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: #e2e8f0; font-weight: 700; }
+        .trend-up { color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .trend-down { color: #ef4444; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .trend-same { color: #64748b; background: rgba(100, 116, 139, 0.15); border: 1px solid rgba(100, 116, 139, 0.3); }
+
+        .player-name { font-size: 1.35rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .player-tag { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; color: #94a3b8; }
+
+        .next-rank-info { text-align: right; padding-right: 15px; border-right: 1px solid rgba(255, 255, 255, 0.1); }
+        .next-rank-label { font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+        .next-rank-val { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #e2e8f0; font-weight: 700; }
 
         .score-container { text-align: right; font-family: 'Orbitron', sans-serif; }
-        .score-value { font-size: 1.9rem; font-weight: 900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
-        .score-label { font-size: 0.65rem; color: #64748b; letter-spacing: 2px; }
+        .score-value { font-size: 1.7rem; font-weight: 900; color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+        .score-label { font-size: 0.6rem; color: #64748b; letter-spacing: 2px; }
 
+        /* VEDLEJŠÍ ŽEBRÍČKY PODLE KATEGORIÍ */
+        .category-tabs { display: flex; gap: 6px; margin-bottom: 15px; background: rgba(0,0,0,0.3); padding: 4px; border-radius: 10px; }
+        .cat-tab { flex: 1; border: none; background: transparent; color: #94a3b8; padding: 6px; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700; cursor: pointer; border-radius: 8px; transition: all 0.2s; text-align: center; }
+        .cat-tab.active { background: var(--cyan); color: #000; box-shadow: 0 0 10px var(--cyan-glow); }
+
+        .category-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cat-rank { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.9rem; color: var(--gold); width: 22px; }
+        .cat-name { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; flex: 1; }
+        .cat-score { font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--cyan); }
+
+        /* POPUP MODAL */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -415,17 +429,17 @@
 
         footer { margin-top: 30px; font-family: 'Orbitron', sans-serif; color: #475569; font-size: 0.85rem; letter-spacing: 1px; }
 
-        @media (max-width: 1024px) {
-            .main-layout { flex-direction: column; }
-            .levels-panel { width: 100%; box-sizing: border-box; }
-            .player-card { grid-template-columns: 45px 1fr 110px; }
+        @media (max-width: 1200px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .player-card { grid-template-columns: 40px 45px 1fr 100px; }
             .next-rank-info { display: none; }
-            .intro-title { font-size: 2.5rem; }
-            .intro-smero { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- CANVAS PRO ANIMACI VÝBUCHU -->
+    <canvas id="explosion-canvas"></canvas>
 
     <!-- ÚVODNÍ INTRO ANIMACE -->
     <div id="intro-screen">
@@ -447,7 +461,9 @@
         <select id="user-select">
             <option value="">-- Vyber své jméno --</option>
         </select>
-        <button class="login-btn" onclick="PrihlasitUzivatele()">PŘIHLÁSIT SE</button>
+        <button class="login-btn" id="login-button" onclick="PrihlasitUzivateleWithAnimation()">
+            <span id="btn-text">PŘIHLÁSIT SE</span>
+        </button>
     </div>
 
     <!-- HLAVIČKA -->
@@ -456,14 +472,30 @@
         <div class="subtitle">▶ AKTUÁLNÍ ŽEBRÍČEK VÝSLEDKŮ ◀</div>
     </header>
 
-    <!-- HLAVNÍ OBSAH -->
+    <!-- HLAVNÍ OBSAH (3-SLOUPCOVÉ ROZVRŽENÍ) -->
     <div class="main-layout">
-        <div class="levels-panel">
+        
+        <!-- LEVÝ PANEL: ÚROVNĚ -->
+        <div class="panel-box">
             <h2>📜 PŘEHLED ÚROVNÍ</h2>
             <div id="levels-list"></div>
         </div>
 
+        <!-- STŘEDNÍ PANEL: HLAVNÍ ŽEBRÍČEK -->
         <div class="leaderboard-container" id="board"></div>
+
+        <!-- PRAVÝ PANEL: VEDLEJŠÍ ŽEBRÍČKY KATEGORIÍ -->
+        <div class="panel-box">
+            <h2>⭐ NEJLEPŠÍ V KATEGORIÍCH</h2>
+            
+            <div class="category-tabs">
+                <button class="cat-tab active" onclick="ZmenKategorii('reklamace', this)">REKLAMACE</button>
+                <button class="cat-tab" onclick="ZmenKategorii('dochazka', this)">DOCHÁZKA</button>
+                <button class="cat-tab" onclick="ZmenKategorii('vykon', this)">VÝKON</button>
+            </div>
+
+            <div id="category-leaderboard"></div>
+        </div>
     </div>
 
     <!-- POPUP KARTA PRO HRÁČE -->
@@ -495,9 +527,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
-                if (intro) {
-                    intro.classList.add('fade-out');
-                }
+                if (intro) intro.classList.add('fade-out');
             }, 2700);
         });
 
@@ -515,48 +545,50 @@
             { nazev: "Legenda skladu", body: 1100, odmena: "4 000 Kč", ikona: "🔥" }
         ];
 
+        // Zadaný tým s minulými pozicemi (prazdnaHodnota = minulaPozice pro vypocet posunu)
         const tym = [
-            { jmeno: "Beran Ondřej", body: 260, diskvalifikovan: false },
-            { jmeno: "Bednářová Sabina", body: 255, diskvalifikovan: false },
-            { jmeno: "Bednářová Helena", body: 260, diskvalifikovan: false },
-            { jmeno: "Blahová Michaela", body: 390, diskvalifikovan: true },
-            { jmeno: "Brablecová Olena", body: 235, diskvalifikovan: false },
-            { jmeno: "Cicálková Eliška", body: 75, diskvalifikovan: true },
-            { jmeno: "Císařová Eva", body: 835, diskvalifikovan: false },
-            { jmeno: "Čechovičová Jana", body: 265, diskvalifikovan: false },
-            { jmeno: "Došková Eva", body: 245, diskvalifikovan: true },
-            { jmeno: "Durbocková Růžena", body: 360, diskvalifikovan: false },
-            { jmeno: "Ferbyová Vendula", body: 345, diskvalifikovan: false },
-            { jmeno: "Fialová Andrea", body: 335, diskvalifikovan: false },
-            { jmeno: "Filip Karel", body: 290, diskvalifikovan: false },
-            { jmeno: "Furchová Anna", body: 170, diskvalifikovan: false },
-            { jmeno: "Gruna Jiří", body: 410, diskvalifikovan: false },
-            { jmeno: "Hudec Karel", body: 150, diskvalifikovan: true },
-            { jmeno: "Kačerková Blanka", body: 525, diskvalifikovan: false },
-            { jmeno: "Křejpská Gábina", body: 260, diskvalifikovan: false },
-            { jmeno: "Kučerová Veronika", body: 455, diskvalifikovan: false },
-            { jmeno: "Kupková Kateřina", body: 445, diskvalifikovan: false },
-            { jmeno: "Janovská Petra", body: 635, diskvalifikovan: false },
-            { jmeno: "Maršálková Žaneta", body: 200, diskvalifikovan: false },
-            { jmeno: "Měřínská Eva", body: 360, diskvalifikovan: false },
-            { jmeno: "Mahovský Pavel", body: 255, diskvalifikovan: true },
-            { jmeno: "Neubauer Jan", body: 270, diskvalifikovan: false },
-            { jmeno: "Novotný Radim", body: 250, diskvalifikovan: false },
-            { jmeno: "Pavlů Zdeněk", body: 270, diskvalifikovan: false },
-            { jmeno: "Jarkovský Dominik", body: 615, diskvalifikovan: false },
-            { jmeno: "Sedlínská Martina", body: 255, diskvalifikovan: false },
-            { jmeno: "Prokopová Veronika", body: 195, diskvalifikovan: false },
-            { jmeno: "Přikryl Jan", body: 110, diskvalifikovan: true },
-            { jmeno: "Málková Sabina", body: 155, diskvalifikovan: false },
-            { jmeno: "Burian Martin", body: 30, diskvalifikovan: false },
-            { jmeno: "Košábková Kateřina", body: 30, diskvalifikovan: false },
-            { jmeno: "Bajer Filip", body: 0, diskvalifikovan: false },
-            { jmeno: "Tancerová Monika", body: 0, diskvalifikovan: false },
-            { jmeno: "Tyl Nikola", body: 0, diskvalifikovan: false },
-            { jmeno: "Minaříková Iveta", body: 0, diskvalifikovan: false }
+            { jmeno: "Beran Ondřej", body: 260, minulaPozice: 18, reklamace: 95, dochazka: 98, vykon: 80, diskvalifikovan: false },
+            { jmeno: "Bednářová Sabina", body: 255, minulaPozice: 19, reklamace: 88, dochazka: 92, vykon: 82, diskvalifikovan: false },
+            { jmeno: "Bednářová Helena", body: 260, minulaPozice: 15, reklamace: 90, dochazka: 95, vykon: 84, diskvalifikovan: false },
+            { jmeno: "Blahová Michaela", body: 390, minulaPozice: 6, reklamace: 70, dochazka: 60, vykon: 75, diskvalifikovan: true },
+            { jmeno: "Brablecová Olena", body: 235, minulaPozice: 21, reklamace: 85, dochazka: 90, vykon: 88, diskvalifikovan: false },
+            { jmeno: "Cicálková Eliška", body: 75, minulaPozice: 30, reklamace: 50, dochazka: 40, vykon: 60, diskvalifikovan: true },
+            { jmeno: "Císařová Eva", body: 835, minulaPozice: 2, reklamace: 99, dochazka: 100, vykon: 98, diskvalifikovan: false },
+            { jmeno: "Čechovičová Jana", body: 265, minulaPozice: 14, reklamace: 92, dochazka: 94, vykon: 81, diskvalifikovan: false },
+            { jmeno: "Došková Eva", body: 245, minulaPozice: 20, reklamace: 75, dochazka: 80, vykon: 70, diskvalifikovan: true },
+            { jmeno: "Durbocková Růžena", body: 360, minulaPozice: 7, reklamace: 94, dochazka: 96, vykon: 90, diskvalifikovan: false },
+            { jmeno: "Ferbyová Vendula", body: 345, minulaPozice: 9, reklamace: 91, dochazka: 93, vykon: 87, diskvalifikovan: false },
+            { jmeno: "Fialová Andrea", body: 335, minulaPozice: 10, reklamace: 89, dochazka: 95, vykon: 86, diskvalifikovan: false },
+            { jmeno: "Filip Karel", body: 290, minulaPozice: 12, reklamace: 86, dochazka: 88, vykon: 92, diskvalifikovan: false },
+            { jmeno: "Furchová Anna", body: 170, minulaPozice: 25, reklamace: 80, dochazka: 85, vykon: 78, diskvalifikovan: false },
+            { jmeno: "Gruna Jiří", body: 410, minulaPozice: 4, reklamace: 96, dochazka: 97, vykon: 95, diskvalifikovan: false },
+            { jmeno: "Hudec Karel", body: 150, minulaPozice: 27, reklamace: 65, dochazka: 70, vykon: 65, diskvalifikovan: true },
+            { jmeno: "Kačerková Blanka", body: 525, minulaPozice: 3, reklamace: 98, dochazka: 99, vykon: 94, diskvalifikovan: false },
+            { jmeno: "Křejpská Gábina", body: 260, minulaPozice: 16, reklamace: 87, dochazka: 91, vykon: 83, diskvalifikovan: false },
+            { jmeno: "Kučerová Veronika", body: 455, minulaPozice: 5, reklamace: 93, dochazka: 96, vykon: 91, diskvalifikovan: false },
+            { jmeno: "Kupková Kateřina", body: 445, minulaPozice: 8, reklamace: 92, dochazka: 94, vykon: 89, diskvalifikovan: false },
+            { jmeno: "Janovská Petra", body: 635, minulaPozice: 1, reklamace: 97, dochazka: 98, vykon: 96, diskvalifikovan: false },
+            { jmeno: "Maršálková Žaneta", body: 200, minulaPozice: 23, reklamace: 82, dochazka: 86, vykon: 79, diskvalifikovan: false },
+            { jmeno: "Měřínská Eva", body: 360, minulaPozice: 11, reklamace: 90, dochazka: 92, vykon: 88, diskvalifikovan: false },
+            { jmeno: "Mahovský Pavel", body: 255, minulaPozice: 17, reklamace: 72, dochazka: 75, vykon: 74, diskvalifikovan: true },
+            { jmeno: "Neubauer Jan", body: 270, minulaPozice: 13, reklamace: 88, dochazka: 90, vykon: 85, diskvalifikovan: false },
+            { jmeno: "Novotný Radim", body: 250, minulaPozice: 22, reklamace: 84, dochazka: 89, vykon: 82, diskvalifikovan: false },
+            { jmeno: "Pavlů Zdeněk", body: 270, minulaPozice: 24, reklamace: 86, dochazka: 88, vykon: 86, diskvalifikovan: false },
+            { jmeno: "Jarkovský Dominik", body: 615, minulaPozice: 26, reklamace: 95, dochazka: 97, vykon: 97, diskvalifikovan: false },
+            { jmeno: "Sedlínská Martina", body: 255, minulaPozice: 28, reklamace: 85, dochazka: 87, vykon: 81, diskvalifikovan: false },
+            { jmeno: "Prokopová Veronika", body: 195, minulaPozice: 29, reklamace: 81, dochazka: 84, vykon: 77, diskvalifikovan: false },
+            { jmeno: "Přikryl Jan", body: 110, minulaPozice: 31, reklamace: 60, dochazka: 65, vykon: 60, diskvalifikovan: true },
+            { jmeno: "Málková Sabina", body: 155, minulaPozice: 32, reklamace: 78, dochazka: 82, vykon: 75, diskvalifikovan: false },
+            { jmeno: "Burian Martin", body: 30, minulaPozice: 33, reklamace: 70, dochazka: 75, vykon: 70, diskvalifikovan: false },
+            { jmeno: "Košábková Kateřina", body: 30, minulaPozice: 34, reklamace: 68, dochazka: 72, vykon: 68, diskvalifikovan: false },
+            { jmeno: "Bajer Filip", body: 0, minulaPozice: 35, reklamace: 50, dochazka: 50, vykon: 50, diskvalifikovan: false },
+            { jmeno: "Tancerová Monika", body: 0, minulaPozice: 36, reklamace: 50, dochazka: 50, vykon: 50, diskvalifikovan: false },
+            { jmeno: "Tyl Nikola", body: 0, minulaPozice: 37, reklamace: 50, dochazka: 50, vykon: 50, diskvalifikovan: false },
+            { jmeno: "Minaříková Iveta", body: 0, minulaPozice: 38, reklamace: 50, dochazka: 50, vykon: 50, diskvalifikovan: false }
         ];
 
         let prihlasenyUzivatel = null;
+        let aktivniKategorie = 'reklamace';
 
         function ZiskejUrovenData(body, diskvalifikovan) {
             if (diskvalifikovan) {
@@ -594,6 +626,7 @@
         }
 
         function Render() {
+            // Render úrovní
             const levelsList = document.getElementById('levels-list');
             levelsList.innerHTML = '';
             urovne.forEach(u => {
@@ -605,6 +638,7 @@
                 `;
             });
 
+            // Řazení hlavního žebříčku
             tym.sort((a, b) => {
                 if (a.diskvalifikovan && !b.diskvalifikovan) return 1;
                 if (!a.diskvalifikovan && b.diskvalifikovan) return -1;
@@ -632,6 +666,21 @@
 
                 const levelData = ZiskejUrovenData(player.body, player.diskvalifikovan);
                 
+                // Výpočet trendu (posun nahoru/dolů/stejně)
+                let trendHtml = "";
+                if (!player.diskvalifikovan) {
+                    const diff = player.minulaPozice - rankNum; // kladné = posun nahoru
+                    if (diff > 0) {
+                        trendHtml = `<div class="trend-badge trend-up">▲ +${diff}</div>`;
+                    } else if (diff < 0) {
+                        trendHtml = `<div class="trend-badge trend-down">▼ ${diff}</div>`;
+                    } else {
+                        trendHtml = `<div class="trend-badge trend-same">➖ 0</div>`;
+                    }
+                } else {
+                    trendHtml = `<div class="trend-badge trend-down">❌</div>`;
+                }
+
                 let nextRankText = "";
                 if (player.diskvalifikovan) {
                     nextRankText = `<span style="color: var(--red);">MIMO SOUTĚŽ</span>`;
@@ -646,6 +695,7 @@
                 card.className = `player-card ${rankClass}`;
                 card.innerHTML = `
                     <div class="rank-number">${player.diskvalifikovan ? '❌' : '#' + rankNum}</div>
+                    <div>${trendHtml}</div>
                     <div class="player-info">
                         <div class="player-name">${player.jmeno}</div>
                         <div class="player-tag">${levelData.ikona} ${levelData.aktualni}</div>
@@ -662,35 +712,132 @@
                 board.appendChild(card);
             });
 
+            RenderKategorie();
+
             const now = new Date();
             document.getElementById('last-update').innerText = now.toLocaleTimeString('cs-CZ');
         }
 
-        function PrihlasitUzivatele() {
+        function RenderKategorie() {
+            const container = document.getElementById('category-leaderboard');
+            container.innerHTML = '';
+
+            const aktivniHracis = tym.filter(t => !t.diskvalifikovan);
+            
+            // Seřazení podle vybrané kategorie
+            aktivniHracis.sort((a, b) => b[aktivniKategorie] - a[aktivniKategorie]);
+
+            aktivniHracis.slice(0, 10).forEach((hrac, idx) => {
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.innerHTML = `
+                    <div class="cat-rank">#${idx + 1}</div>
+                    <div class="cat-name">${hrac.jmeno}</div>
+                    <div class="cat-score">${hrac[aktivniKategorie]} pts</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function ZmenKategorii(kat, btn) {
+            aktivniKategorie = kat;
+            document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            RenderKategorie();
+        }
+
+        // ANIMACE PŘIHLÁŠENÍ S VÝBUCHEM A NAČÍTÁNÍM
+        function PrihlasitUzivateleWithAnimation() {
             const jmeno = document.getElementById('user-select').value;
             if (!jmeno) return;
 
-            prihlasenyUzivatel = jmeno;
-            const hrac = tym.find(t => t.jmeno === jmeno);
-            const levelData = ZiskejUrovenData(hrac.body, hrac.diskvalifikovan);
+            const btnText = document.getElementById('btn-text');
+            btnText.innerText = "NAČÍTÁNÍ...";
 
-            document.getElementById('pop-name').innerText = hrac.jmeno;
-            document.getElementById('pop-rank').innerText = `${levelData.ikona} ÚROVEŇ: ${levelData.aktualni}`;
-            document.getElementById('pop-reward').innerText = levelData.odmena;
-            document.getElementById('pop-pts').innerText = hrac.body;
-            document.getElementById('pop-badge').innerText = levelData.ikona;
+            setTimeout(() => {
+                TriggerExplosion();
+                
+                setTimeout(() => {
+                    prihlasenyUzivatel = jmeno;
+                    const hrac = tym.find(t => t.jmeno === jmeno);
+                    const levelData = ZiskejUrovenData(hrac.body, hrac.diskvalifikovan);
 
-            const rewardBox = document.getElementById('pop-reward-box');
-            if (hrac.diskvalifikovan) {
-                rewardBox.style.borderColor = 'var(--red)';
-                rewardBox.style.background = 'rgba(239, 68, 68, 0.1)';
-            } else {
-                rewardBox.style.borderColor = 'var(--green)';
-                rewardBox.style.background = 'rgba(16, 185, 129, 0.1)';
+                    document.getElementById('pop-name').innerText = hrac.jmeno;
+                    document.getElementById('pop-rank').innerText = `${levelData.ikona} ÚROVEŇ: ${levelData.aktualni}`;
+                    document.getElementById('pop-reward').innerText = levelData.odmena;
+                    document.getElementById('pop-pts').innerText = hrac.body;
+                    document.getElementById('pop-badge').innerText = levelData.ikona;
+
+                    const rewardBox = document.getElementById('pop-reward-box');
+                    if (hrac.diskvalifikovan) {
+                        rewardBox.style.borderColor = 'var(--red)';
+                        rewardBox.style.background = 'rgba(239, 68, 68, 0.1)';
+                    } else {
+                        rewardBox.style.borderColor = 'var(--green)';
+                        rewardBox.style.background = 'rgba(16, 185, 129, 0.1)';
+                    }
+
+                    document.getElementById('modal').classList.add('active');
+                    btnText.innerText = "PŘIHLÁSIT SE";
+                    Render();
+                }, 400);
+            }, 800);
+        }
+
+        // SCRIPT PRO ČÁSTICOVÝ VÝBUCH
+        function TriggerExplosion() {
+            const canvas = document.getElementById('explosion-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#00f0ff', '#a855f7', '#ffb703', '#10b981', '#ffffff'];
+
+            for (let i = 0; i < 120; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 25,
+                    vy: (Math.random() - 0.5) * 25,
+                    size: Math.random() * 6 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    life: Math.random() * 0.03 + 0.015
+                });
             }
 
-            document.getElementById('modal').classList.add('active');
-            Render();
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.alpha -= p.life;
+
+                    if (p.alpha > 0) {
+                        alive = true;
+                        ctx.save();
+                        ctx.globalAlpha = p.alpha;
+                        ctx.fillStyle = p.color;
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                });
+
+                if (alive) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
         }
 
         function ZavritModal() {
