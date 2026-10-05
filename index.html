@@ -199,7 +199,7 @@
         .player-card {
             background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px; padding: 12px 20px;
-            display: grid; grid-template-columns: 50px 50px 1fr 60px 160px 110px;
+            display: grid; grid-template-columns: 45px 45px 1fr 90px 150px 100px;
             align-items: center; backdrop-filter: blur(12px);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -224,10 +224,29 @@
         .rank-2 .rank-number { color: var(--silver); text-shadow: 0 0 10px var(--silver-glow); }
         .rank-3 .rank-number { color: var(--bronze); text-shadow: 0 0 10px var(--bronze-glow); }
 
-        .team-badge {
-            font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 900;
-            padding: 3px 8px; border-radius: 6px; text-align: center; width: fit-content;
-            background: rgba(168, 85, 247, 0.2); border: 1px solid var(--purple); color: var(--purple);
+        /* VÝRAZNÉ NEÓNOVÉ ZNAČKY PRO TÝMY */
+        .team-badge-c {
+            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 900;
+            padding: 5px 12px; border-radius: 8px; text-align: center;
+            background: rgba(0, 240, 255, 0.15); border: 1px solid var(--cyan); color: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+        .team-badge-d {
+            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 900;
+            padding: 5px 12px; border-radius: 8px; text-align: center;
+            background: rgba(168, 85, 247, 0.15); border: 1px solid var(--purple); color: var(--purple);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+        }
+        .team-badge-m {
+            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 900;
+            padding: 5px 12px; border-radius: 8px; text-align: center;
+            background: rgba(255, 183, 3, 0.15); border: 1px solid var(--gold); color: var(--gold);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+        .team-badge-x {
+            font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 900;
+            padding: 5px 12px; border-radius: 8px; text-align: center;
+            background: rgba(239, 68, 68, 0.15); border: 1px solid var(--red); color: var(--red);
         }
 
         .trend-badge {
@@ -319,7 +338,25 @@
 
         .close-btn:hover { background: #334155; transform: scale(1.03); }
 
+        /* TLAČÍTKO PRO TISK DO PDF */
+        .print-btn {
+            position: fixed; bottom: 25px; right: 25px;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #fff; border: none; padding: 14px 26px; border-radius: 50px;
+            font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 0.95rem;
+            cursor: pointer; box-shadow: 0 0 20px var(--cyan-glow);
+            transition: all 0.3s ease; z-index: 999;
+        }
+        .print-btn:hover { transform: scale(1.08); box-shadow: 0 0 30px var(--cyan); }
+
         footer { margin-top: 30px; font-family: 'Orbitron', sans-serif; color: #475569; font-size: 0.85rem; letter-spacing: 1px; }
+
+        @media print {
+            .login-bar, .print-btn, #intro-screen, .category-tabs, #explosion-canvas { display: none !important; }
+            body { background: #fff !important; color: #000 !important; }
+            .player-card, .panel-box, .team-card { border: 1px solid #ccc !important; box-shadow: none !important; color: #000 !important; background: #fff !important; }
+            h1, .score-value, .team-pts { color: #000 !important; text-shadow: none !important; }
+        }
 
         @media (max-width: 1200px) {
             .main-layout { grid-template-columns: 1fr; }
@@ -408,6 +445,9 @@
         </div>
     </div>
 
+    <!-- TLAČÍTKO TISKU / ULOŽENÍ DO PDF -->
+    <button class="print-btn" onclick="window.print()">🖨️ TISK / ULOŽIT DO PDF</button>
+
     <footer>
         POSLEDNÍ AKTUALIZACE: <span id="last-update" style="color: var(--cyan);">--:--:--</span>
     </footer>
@@ -434,24 +474,24 @@
             { nazev: "Legenda skladu", body: 1100, odmena: "4 000 Kč", ikona: "🔥" }
         ];
 
-        // Opravené rozřazení: Beran Ondřej -> D, Kačerková Blanka -> C
+        // Seznam s nejnovějšími týmy z obrázku (diskvalifikovaní = "X")
         const tym = [
             { jmeno: "Beran Ondřej", body: 260, posun: 1, tymNazev: "D", reklamace: 95, dochazka: 98, vykon: 80, diskvalifikovan: false },
             { jmeno: "Bednářová Sabina", body: 255, posun: 0, tymNazev: "C", reklamace: 88, dochazka: 92, vykon: 82, diskvalifikovan: false },
             { jmeno: "Bednářová Helena", body: 260, posun: 1, tymNazev: "M", reklamace: 90, dochazka: 95, vykon: 84, diskvalifikovan: false },
-            { jmeno: "Blahová Michaela", body: 390, posun: -1, tymNazev: "D", reklamace: 70, dochazka: 60, vykon: 75, diskvalifikovan: true },
+            { jmeno: "Blahová Michaela", body: 390, posun: -1, tymNazev: "X", reklamace: 70, dochazka: 60, vykon: 75, diskvalifikovan: true },
             { jmeno: "Brablecová Olena", body: 235, posun: 1, tymNazev: "C", reklamace: 85, dochazka: 90, vykon: 88, diskvalifikovan: false },
-            { jmeno: "Cicálková Eliška", body: 75, posun: 0, tymNazev: "D", reklamace: 50, dochazka: 40, vykon: 60, diskvalifikovan: true },
+            { jmeno: "Cicálková Eliška", body: 75, posun: 0, tymNazev: "X", reklamace: 50, dochazka: 40, vykon: 60, diskvalifikovan: true },
             { jmeno: "Císařová Eva", body: 835, posun: 1, tymNazev: "M", reklamace: 99, dochazka: 100, vykon: 98, diskvalifikovan: false },
             { jmeno: "Čechovičová Jana", body: 265, posun: 0, tymNazev: "C", reklamace: 92, dochazka: 94, vykon: 81, diskvalifikovan: false },
-            { jmeno: "Došková Eva", body: 245, posun: -1, tymNazev: "D", reklamace: 75, dochazka: 80, vykon: 70, diskvalifikovan: true },
+            { jmeno: "Došková Eva", body: 245, posun: -1, tymNazev: "X", reklamace: 75, dochazka: 80, vykon: 70, diskvalifikovan: true },
             { jmeno: "Durbocková Růžena", body: 360, posun: 1, tymNazev: "D", reklamace: 94, dochazka: 96, vykon: 90, diskvalifikovan: false },
             { jmeno: "Ferbyová Vendula", body: 345, posun: 0, tymNazev: "D", reklamace: 91, dochazka: 93, vykon: 87, diskvalifikovan: false },
             { jmeno: "Fialová Andrea", body: 335, posun: -1, tymNazev: "M", reklamace: 89, dochazka: 95, vykon: 86, diskvalifikovan: false },
             { jmeno: "Filip Karel", body: 290, posun: 0, tymNazev: "M", reklamace: 86, dochazka: 88, vykon: 92, diskvalifikovan: false },
             { jmeno: "Furchová Anna", body: 170, posun: 1, tymNazev: "D", reklamace: 80, dochazka: 85, vykon: 78, diskvalifikovan: false },
             { jmeno: "Gruna Jiří", body: 410, posun: 0, tymNazev: "M", reklamace: 96, dochazka: 97, vykon: 95, diskvalifikovan: false },
-            { jmeno: "Hudec Karel", body: 150, posun: -1, tymNazev: "C", reklamace: 65, dochazka: 70, vykon: 65, diskvalifikovan: true },
+            { jmeno: "Hudec Karel", body: 150, posun: -1, tymNazev: "X", reklamace: 65, dochazka: 70, vykon: 65, diskvalifikovan: true },
             { jmeno: "Kačerková Blanka", body: 525, posun: 1, tymNazev: "C", reklamace: 98, dochazka: 99, vykon: 94, diskvalifikovan: false },
             { jmeno: "Křejpská Gábina", body: 260, posun: 0, tymNazev: "C", reklamace: 87, dochazka: 91, vykon: 83, diskvalifikovan: false },
             { jmeno: "Kučerová Veronika", body: 455, posun: 1, tymNazev: "M", reklamace: 93, dochazka: 96, vykon: 91, diskvalifikovan: false },
@@ -459,14 +499,14 @@
             { jmeno: "Janovská Petra", body: 635, posun: 1, tymNazev: "M", reklamace: 97, dochazka: 98, vykon: 96, diskvalifikovan: false },
             { jmeno: "Maršálková Žaneta", body: 200, posun: 0, tymNazev: "C", reklamace: 82, dochazka: 86, vykon: 79, diskvalifikovan: false },
             { jmeno: "Měřínská Eva", body: 360, posun: 1, tymNazev: "C", reklamace: 90, dochazka: 92, vykon: 88, diskvalifikovan: false },
-            { jmeno: "Mahovský Pavel", body: 255, posun: -1, tymNazev: "C", reklamace: 72, dochazka: 75, vykon: 74, diskvalifikovan: true },
+            { jmeno: "Mahovský Pavel", body: 255, posun: -1, tymNazev: "X", reklamace: 72, dochazka: 75, vykon: 74, diskvalifikovan: true },
             { jmeno: "Neubauer Jan", body: 270, posun: 0, tymNazev: "C", reklamace: 88, dochazka: 90, vykon: 85, diskvalifikovan: false },
             { jmeno: "Novotný Radim", body: 250, posun: -1, tymNazev: "C", reklamace: 84, dochazka: 89, vykon: 82, diskvalifikovan: false },
             { jmeno: "Pavlů Zdeněk", body: 270, posun: 1, tymNazev: "M", reklamace: 86, dochazka: 88, vykon: 86, diskvalifikovan: false },
             { jmeno: "Jarkovský Dominik", body: 615, posun: 1, tymNazev: "D", reklamace: 95, dochazka: 97, vykon: 97, diskvalifikovan: false },
             { jmeno: "Sedlínská Martina", body: 255, posun: -1, tymNazev: "D", reklamace: 85, dochazka: 87, vykon: 81, diskvalifikovan: false },
             { jmeno: "Prokopová Veronika", body: 195, posun: 0, tymNazev: "C", reklamace: 81, dochazka: 84, vykon: 77, diskvalifikovan: false },
-            { jmeno: "Přikryl Jan", body: 110, posun: -1, tymNazev: "M", reklamace: 60, dochazka: 65, vykon: 60, diskvalifikovan: true },
+            { jmeno: "Přikryl Jan", body: 110, posun: -1, tymNazev: "X", reklamace: 60, dochazka: 65, vykon: 60, diskvalifikovan: true },
             { jmeno: "Málková Sabina", body: 155, posun: 0, tymNazev: "D", reklamace: 78, dochazka: 82, vykon: 75, diskvalifikovan: false },
             { jmeno: "Burian Martin", body: 30, posun: 0, tymNazev: "M", reklamace: 70, dochazka: 75, vykon: 70, diskvalifikovan: false },
             { jmeno: "Košábková Kateřina", body: 30, posun: 0, tymNazev: "D", reklamace: 68, dochazka: 72, vykon: 68, diskvalifikovan: false },
@@ -606,6 +646,12 @@
 
                 const card = document.createElement('div');
                 card.className = `player-card ${rankClass}`;
+                
+                let teamClass = "team-badge-c";
+                if (player.tymNazev === "D") teamClass = "team-badge-d";
+                else if (player.tymNazev === "M") teamClass = "team-badge-m";
+                else if (player.tymNazev === "X") teamClass = "team-badge-x";
+
                 card.innerHTML = `
                     <div class="rank-number">${player.diskvalifikovan ? '❌' : '#' + rankNum}</div>
                     <div>${trendHtml}</div>
@@ -613,7 +659,7 @@
                         <div class="player-name">${player.jmeno}</div>
                         <div class="player-tag">${levelData.ikona} ${levelData.aktualni}</div>
                     </div>
-                    <div><span class="team-badge">TÝM ${player.tymNazev}</span></div>
+                    <div><span class="${teamClass}">${player.tymNazev === 'X' ? 'DISKVAL.' : 'TÝM ' + player.tymNazev}</span></div>
                     <div class="next-rank-info">
                         <div class="next-rank-label">${player.diskvalifikovan ? 'STAV' : 'Chybí do další:'}</div>
                         <div class="next-rank-val">${nextRankText}</div>
