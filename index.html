@@ -41,8 +41,128 @@
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
+        /* ========================================== */
+        /* INTRO ANIMACE / SPLASH SCREEN              */
+        /* ========================================== */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #03050a;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+        }
+
+        #intro-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .intro-content {
+            animation: introZoom 2.8s ease-out forwards;
+            padding: 0 20px;
+        }
+
+        .intro-sub {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--cyan);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--cyan-glow);
+            animation: pulseText 2s infinite alternate;
+        }
+
+        .intro-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            background: linear-gradient(135deg, #ffffff 20%, var(--cyan) 60%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(0, 240, 255, 0.5);
+            margin: 0 0 15px 0;
+            line-height: 1.1;
+        }
+
+        .intro-smero {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 12px;
+            text-shadow: 0 0 25px var(--gold-glow);
+            border-top: 2px solid rgba(255, 183, 3, 0.3);
+            border-bottom: 2px solid rgba(255, 183, 3, 0.3);
+            padding: 10px 30px;
+            display: inline-block;
+        }
+
+        .intro-loader {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .intro-loader-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            box-shadow: 0 0 15px var(--cyan);
+            animation: fillBar 2.5s ease-in-out forwards;
+        }
+
+        @keyframes introZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.7) translateY(30px);
+                filter: blur(10px);
+            }
+            30% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+            80% {
+                opacity: 1;
+                transform: scale(1.05) translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes fillBar {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.7; text-shadow: 0 0 10px var(--cyan-glow); }
+            100% { opacity: 1; text-shadow: 0 0 25px var(--cyan-glow); }
+        }
+
+        /* ========================================== */
+        /* HLAVNÍ STRÁNKA                             */
+        /* ========================================== */
         .login-bar {
             background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(0, 240, 255, 0.3);
@@ -300,11 +420,28 @@
             .levels-panel { width: 100%; box-sizing: border-box; }
             .player-card { grid-template-columns: 45px 1fr 110px; }
             .next-rank-info { display: none; }
+            .intro-title { font-size: 2.5rem; }
+            .intro-smero { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ÚVODNÍ INTRO ANIMACE -->
+    <div id="intro-screen">
+        <div class="intro-content">
+            <div class="intro-sub">⚡ VÍTEJ VE SOUTĚŽI ⚡</div>
+            <h1 class="intro-title">SKLADOVÁ LIGA</h1>
+            <div class="intro-smero">SMERO 2026</div>
+            <div style="display: flex; justify-content: center;">
+                <div class="intro-loader">
+                    <div class="intro-loader-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PŘIHLAŠOVACÍ LIŠTA -->
     <div class="login-bar">
         <label for="user-select">🎮 HRÁČ:</label>
         <select id="user-select">
@@ -313,11 +450,13 @@
         <button class="login-btn" onclick="PrihlasitUzivatele()">PŘIHLÁSIT SE</button>
     </div>
 
+    <!-- HLAVIČKA -->
     <header>
         <h1>🏆 SKLADOVÁ LIGA 2026 🏆</h1>
         <div class="subtitle">▶ AKTUÁLNÍ ŽEBRÍČEK VÝSLEDKŮ ◀</div>
     </header>
 
+    <!-- HLAVNÍ OBSAH -->
     <div class="main-layout">
         <div class="levels-panel">
             <h2>📜 PŘEHLED ÚROVNÍ</h2>
@@ -327,6 +466,7 @@
         <div class="leaderboard-container" id="board"></div>
     </div>
 
+    <!-- POPUP KARTA PRO HRÁČE -->
     <div class="modal-overlay" id="modal">
         <div class="player-popup">
             <div class="badge-icon" id="pop-badge">🎖️</div>
@@ -351,6 +491,16 @@
     </footer>
 
     <script>
+        // Spuštění a skrytí úvodního intra po 2.7 sekundách
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const intro = document.getElementById('intro-screen');
+                if (intro) {
+                    intro.classList.add('fade-out');
+                }
+            }, 2700);
+        });
+
         const urovne = [
             { nazev: "Bronz I", body: 60, odmena: "400 Kč", ikona: "🥉" },
             { nazev: "Bronz II", body: 130, odmena: "600 Kč", ikona: "🥉" },
