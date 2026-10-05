@@ -365,40 +365,45 @@
             { nazev: "Legenda skladu", body: 1100, odmena: "4 000 Kč", ikona: "🔥" }
         ];
 
-        // Seznam s novými daty a vyznačenou diskvalifikací
         const tym = [
-            { jmeno: "Beran Ondřej", body: 230, diskvalifikovan: false },
+            { jmeno: "Beran Ondřej", body: 260, diskvalifikovan: false },
             { jmeno: "Bednářová Sabina", body: 255, diskvalifikovan: false },
-            { jmeno: "Bednářová Helena", body: 225, diskvalifikovan: false },
-            { jmeno: "Blahová Michaela", body: 390, diskvalifikovan: false },
-            { jmeno: "Brablecová Olena", body: 190, diskvalifikovan: false },
+            { jmeno: "Bednářová Helena", body: 260, diskvalifikovan: false },
+            { jmeno: "Blahová Michaela", body: 390, diskvalifikovan: true },
+            { jmeno: "Brablecová Olena", body: 235, diskvalifikovan: false },
             { jmeno: "Cicálková Eliška", body: 75, diskvalifikovan: true },
-            { jmeno: "Císařová Eva", body: 720, diskvalifikovan: false },
-            { jmeno: "Čechovičová Jana", body: 220, diskvalifikovan: false },
+            { jmeno: "Císařová Eva", body: 835, diskvalifikovan: false },
+            { jmeno: "Čechovičová Jana", body: 265, diskvalifikovan: false },
             { jmeno: "Došková Eva", body: 245, diskvalifikovan: true },
-            { jmeno: "Durbocková Růžena", body: 295, diskvalifikovan: false },
-            { jmeno: "Ferbyová Vendula", body: 300, diskvalifikovan: false },
-            { jmeno: "Fialová Andrea", body: 300, diskvalifikovan: false },
-            { jmeno: "Filip Karel", body: 255, diskvalifikovan: false },
-            { jmeno: "Furchová Anna", body: 135, diskvalifikovan: false },
+            { jmeno: "Durbocková Růžena", body: 360, diskvalifikovan: false },
+            { jmeno: "Ferbyová Vendula", body: 345, diskvalifikovan: false },
+            { jmeno: "Fialová Andrea", body: 335, diskvalifikovan: false },
+            { jmeno: "Filip Karel", body: 290, diskvalifikovan: false },
+            { jmeno: "Furchová Anna", body: 170, diskvalifikovan: false },
             { jmeno: "Gruna Jiří", body: 410, diskvalifikovan: false },
             { jmeno: "Hudec Karel", body: 150, diskvalifikovan: true },
-            { jmeno: "Kačerková Blanka", body: 460, diskvalifikovan: false },
-            { jmeno: "Křejpská Gábina", body: 230, diskvalifikovan: false },
-            { jmeno: "Kučerová Veronika", body: 420, diskvalifikovan: false },
-            { jmeno: "Kupková Kateřina", body: 360, diskvalifikovan: false },
-            { jmeno: "Janovská Petra", body: 500, diskvalifikovan: false },
-            { jmeno: "Maršálková Žaneta", body: 170, diskvalifikovan: false },
-            { jmeno: "Měřínská Eva", body: 315, diskvalifikovan: false },
+            { jmeno: "Kačerková Blanka", body: 525, diskvalifikovan: false },
+            { jmeno: "Křejpská Gábina", body: 260, diskvalifikovan: false },
+            { jmeno: "Kučerová Veronika", body: 455, diskvalifikovan: false },
+            { jmeno: "Kupková Kateřina", body: 445, diskvalifikovan: false },
+            { jmeno: "Janovská Petra", body: 635, diskvalifikovan: false },
+            { jmeno: "Maršálková Žaneta", body: 200, diskvalifikovan: false },
+            { jmeno: "Měřínská Eva", body: 360, diskvalifikovan: false },
             { jmeno: "Mahovský Pavel", body: 255, diskvalifikovan: true },
-            { jmeno: "Neubauer Jan", body: 240, diskvalifikovan: false },
-            { jmeno: "Novotný Radim", body: 230, diskvalifikovan: false },
-            { jmeno: "Pavlů Zdeněk", body: 240, diskvalifikovan: false },
-            { jmeno: "Jarkovský Dominik", body: 520, diskvalifikovan: false },
-            { jmeno: "Sedlínská Martina", body: 235, diskvalifikovan: false },
-            { jmeno: "Prokopová Veronika", body: 150, diskvalifikovan: false },
+            { jmeno: "Neubauer Jan", body: 270, diskvalifikovan: false },
+            { jmeno: "Novotný Radim", body: 250, diskvalifikovan: false },
+            { jmeno: "Pavlů Zdeněk", body: 270, diskvalifikovan: false },
+            { jmeno: "Jarkovský Dominik", body: 615, diskvalifikovan: false },
+            { jmeno: "Sedlínská Martina", body: 255, diskvalifikovan: false },
+            { jmeno: "Prokopová Veronika", body: 195, diskvalifikovan: false },
             { jmeno: "Přikryl Jan", body: 110, diskvalifikovan: true },
-            { jmeno: "Málková Sabina", body: 155, diskvalifikovan: false }
+            { jmeno: "Málková Sabina", body: 155, diskvalifikovan: false },
+            { jmeno: "Burian Martin", body: 30, diskvalifikovan: false },
+            { jmeno: "Košábková Kateřina", body: 30, diskvalifikovan: false },
+            { jmeno: "Bajer Filip", body: 0, diskvalifikovan: false },
+            { jmeno: "Tancerová Monika", body: 0, diskvalifikovan: false },
+            { jmeno: "Tyl Nikola", body: 0, diskvalifikovan: false },
+            { jmeno: "Minaříková Iveta", body: 0, diskvalifikovan: false }
         ];
 
         let prihlasenyUzivatel = null;
@@ -450,7 +455,6 @@
                 `;
             });
 
-            // Seřazení: Aktivní hráči podle bodů, diskvalifikovaní na konec
             tym.sort((a, b) => {
                 if (a.diskvalifikovan && !b.diskvalifikovan) return 1;
                 if (!a.diskvalifikovan && b.diskvalifikovan) return -1;
